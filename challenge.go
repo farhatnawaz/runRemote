@@ -4,37 +4,22 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
+	"log"
 	"os"
-
-	"golang.org/x/crypto/ssh"
+	"os/exec"
 )
 
-func runCmdRemotely(user string, address string, password string, cmd string) (string, error) {
+func runCmdRemotely(address string, command string) {
 
-	// Authentication
-	config := &ssh.ClientConfig{
-		User: user,
-		Auth: []ssh.AuthMethod{
-			ssh.Password(password),
-		},
-	}
-	// Connect
-	client, err := ssh.Dial("tcp", address+":22", config) //replace 22 with any open port
+	cmd := exec.Command("ssh", address, command) // exec.command would ask for the password anyway
+	var out bytes.Buffer
+	cmd.Stdout = &out
+	err := cmd.Run()
 	if err != nil {
-		return "", err
+		log.Fatal(err)
 	}
-	// Create a session.
-	session, err := client.NewSession()
-	if err != nil {
-		return "", err
-	}
-	defer session.Close()
-	var a bytes.Buffer
-	session.Stdout = &a // to get output
 
-	// Run the command
-	err = session.Run(cmd)
-	return a.String(), err
+	fmt.Println(&out)
 }
 
 func main() {
@@ -44,18 +29,12 @@ func main() {
 	// I know I had the choice to hard code the values instead of taking input from the user. I just thought
 	// it would seem more convenient to do it this way.
 
-	fmt.Println("Please enter the username: ")
-	user, _ := reader.ReadString('\n')
-
-	fmt.Println("Please enter the address: ")
+	fmt.Println("Please enter the address (format user@address) : ")
 	address, _ := reader.ReadString('\n')
-
-	fmt.Println("Please enter the password: ")
-	password, _ := reader.ReadString('\n')
 
 	fmt.Println("Please enter the command: ")
 	cmd, _ := reader.ReadString('\n')
 
-	fmt.Println(runCmdRemotely(user, address, password, cmd))
+	runCmdRemotely(address, cmd)
 
 }
