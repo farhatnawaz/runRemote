@@ -35,6 +35,11 @@ func isValidAddress(address string) bool {
 	return match
 }
 
+//This function validates the format of the address entered by the user
+func isValidFormat(address string) bool {
+	return strings.Contains(address, "@")
+}
+
 func main() {
 
 	reader := bufio.NewReader(os.Stdin)
@@ -48,9 +53,10 @@ func main() {
 		fmt.Println("Please enter the address (format user@address) : ")
 		address, _ := reader.ReadString('\n')
 
-		if isValidAddress(address) {
+		if isValidFormat(address) && isValidAddress(address) {
 			break
 		}
+
 	}
 
 	fmt.Println("Please enter the command: ")
