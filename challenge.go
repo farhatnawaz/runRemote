@@ -13,6 +13,7 @@ import (
 
 //This is the actual function that helps access the remote machine and then execute the given command
 func runCmdRemotely(address string, command string) {
+	fmt.Println(address)
 
 	cmd := exec.Command("ssh", address, command) // exec.command would ask for the password anyway
 	var out bytes.Buffer
@@ -51,9 +52,10 @@ func main() {
 
 	for {
 		fmt.Println("Please enter the address (format user@address) : ")
-		address, _ := reader.ReadString('\n')
+		tempAddress, _ := reader.ReadString('\n')
 
-		if isValidFormat(address) && isValidAddress(address) {
+		if isValidFormat(tempAddress) && isValidAddress(tempAddress) {
+			address = tempAddress
 			break
 		}
 
