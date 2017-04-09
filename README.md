@@ -1,0 +1,1 @@
+This program accesses a machine on the local network remotely and runs the command user enters. The program has been written in Go language and uses ssh package to do the aforementioned task.
