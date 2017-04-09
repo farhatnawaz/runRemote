@@ -19,7 +19,7 @@ func runCmdRemotely(user string, address string, password string, cmd string) (s
 		},
 	}
 	// Connect
-	client, err := ssh.Dial("tcp", address+":22", config)
+	client, err := ssh.Dial("tcp", address+":22", config) //replace 22 with any open port
 	if err != nil {
 		return "", err
 	}
