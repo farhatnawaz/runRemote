@@ -1,4 +1,4 @@
-This program accesses a machine on the local network remotely and runs the command user enters. The program has been written in Go language and uses ssh package to do the aforementioned task.
+This program accesses a machine remotely and runs the command user enters. The program has been written in Go language and uses ssh package to do the aforementioned task.
 
 The code comprises of two validation functions, one ssh function and a main function. Two validation functions are used to validate the format of the IP address as well as the format of the overall address.
 
