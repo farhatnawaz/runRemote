@@ -4,4 +4,4 @@ The code comprises of two validation functions, one ssh function and a main func
 
 The ssh function is the actual one that is used to access the machine remotely using the address provided by the user and then run the command.
 
-NOTE: I did the task using the crypto/ssh package provided by go, but I was having a connection problem while testing. And as a result I had to change the approach altogether.
+NOTE: This can also be achieved by crypto/ssh package provided by go out of the box.
