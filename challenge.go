@@ -46,8 +46,8 @@ func main() {
 
 	var address string
 
-	// I know I had the choice to hard code the values instead of taking input from the user. I just thought
-	// it would seem more convenient to do it this way.
+	// Asking the user to enter an address of the remote machine. The user keeps getting prompted unless they enter a
+	// valid address in the format mentioned below.
 
 	for {
 		fmt.Println("Please enter the address (format user@address) : ")
